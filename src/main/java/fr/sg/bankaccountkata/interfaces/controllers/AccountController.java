@@ -19,4 +19,9 @@ public class AccountController {
     public void deposit(@PathVariable String accountId, @RequestParam BigDecimal amount) throws AccountNotFoundException {
         accountService.deposit(accountId, amount);
     }
+
+    @PostMapping("/{accountId}/withdraw")
+    public void withdraw(@PathVariable String accountId, @RequestParam BigDecimal amount) throws AccountNotFoundException {
+        accountService.withdraw(accountId, amount);
+    }
 }
