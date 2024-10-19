@@ -31,4 +31,13 @@ class AccountTest {
 
         assertThrows(InsufficientFundsException.class, () -> account.withdraw(new BigDecimal("50.00")));
     }
+
+    @Test
+    void withdraw_shouldDecreaseBalance_whenFundsAreSufficient() {
+        account.deposit(new BigDecimal("10.00"));
+        account.withdraw(new BigDecimal("5.00"));
+
+        assertEquals(new BigDecimal("5.00"), account.getBalance());
+        assertEquals(2, account.getTransactions().size());
+    }
 }
