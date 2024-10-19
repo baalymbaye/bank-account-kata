@@ -27,7 +27,7 @@ class AccountTest {
 
     @Test
     void withdraw_shouldThrowException_whenInsufficientFunds() {
-        account.deposit(new BigDecimal("1000.00"));
+        account.deposit(new BigDecimal("10.00"));
 
         assertThrows(InsufficientFundsException.class, () -> account.withdraw(new BigDecimal("50.00")));
     }
