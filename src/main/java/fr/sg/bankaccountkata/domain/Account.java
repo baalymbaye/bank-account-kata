@@ -1,6 +1,7 @@
 package fr.sg.bankaccountkata.domain;
 
 import fr.sg.bankaccountkata.domain.constants.TransactionType;
+import fr.sg.bankaccountkata.interfaces.exceptions.InsufficientFundsException;
 import fr.sg.bankaccountkata.interfaces.exceptions.InvalidAmountException;
 import lombok.Getter;
 
@@ -26,6 +27,15 @@ public class Account {
         validateAmount(amount);
         balance = balance.add(amount);
         addOperation(amount, TransactionType.DEPOSIT);
+    }
+
+    public void withdraw(BigDecimal amount) {
+        validateAmount(amount);
+        if (0 > balance.compareTo(amount)) {
+            throw new InsufficientFundsException("Insufficient funds for withdrawal");
+        }
+        balance = balance.subtract(amount);
+        addOperation(amount, TransactionType.WITHDRAWAL);
     }
 
     private void validateAmount(BigDecimal amount) {
