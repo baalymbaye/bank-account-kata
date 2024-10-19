@@ -52,4 +52,19 @@ class AccountControllerTest {
 
         verify(accountService).deposit(accountId, amount);
     }
+
+    @Test
+    public void testWithdraw() throws Exception {
+        String accountId = "123";
+        BigDecimal amount = new BigDecimal("50.00");
+
+        doNothing().when(accountService).withdraw(accountId, amount);
+
+        mockMvc.perform(post("/api/accounts/{accountId}/withdraw", accountId)
+                .param("amount", amount.toString())
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+
+        verify(accountService).withdraw(accountId, amount);
+    }
 }
