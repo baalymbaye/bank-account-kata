@@ -18,6 +18,7 @@ class AccountTest {
     @Test
     void deposit_shouldIncreaseBalance() {
         account.deposit(new BigDecimal("1000.00"));
+
         assertEquals(new BigDecimal("1000.00"), account.getBalance());
         assertEquals(1, account.getTransactions().size());
     }
