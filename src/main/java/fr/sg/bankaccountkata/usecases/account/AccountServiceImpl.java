@@ -22,6 +22,13 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
     }
 
+    @Override
+    public void withdraw(String accountId, BigDecimal amount) throws AccountNotFoundException {
+        Account account = getAccountOrThrow(accountId);
+        account.withdraw(amount);
+        accountRepository.save(account);
+    }
+
     private Account getAccountOrThrow(String accountId) throws AccountNotFoundException {
         return accountRepository.findById(accountId)
             .orElseThrow(() -> new AccountNotFoundException("Account not found: " + accountId));
